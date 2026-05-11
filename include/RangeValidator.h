@@ -27,24 +27,10 @@ private:
 template <>
 class RangeValidator<Date> : public Validator<Date> {
 public:
-    RangeValidator(const Date& min, const Date& max, const std::string& err)
-        : m_minValue(min), m_maxValue(max), m_defaultErrorMessage(err) {
-    }
+    RangeValidator(const Date& min, const Date& max, const std::string& err);
 
-    bool isValid(const Date& value) const override {
-        std::string dateErr = value.getValidationError();
-        if (!dateErr.empty()) {
-            m_currentErrorMessage = dateErr;
-            return false;
-        }
-        if (value >= m_minValue && value <= m_maxValue) return true;
-        m_currentErrorMessage = m_defaultErrorMessage;
-        return false;
-    }
-
-    std::string getErrorMessage() const override {
-        return m_currentErrorMessage;
-    }
+    bool isValid(const Date& value) const override;
+    std::string getErrorMessage() const override;
 
 private:
     Date m_minValue;

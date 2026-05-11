@@ -37,23 +37,17 @@ std::string Date::getValidationError() const {
 }
 
 std::istream& Date::read(std::istream& is) {
-    std::string dateStr;
-    if (!(is >> dateStr)) return is;
+    int y = 0, m = 0, d = 0;
+    char dash1 = 0, dash2 = 0;
 
-    m_year = 0; m_month = 0; m_day = 0;
-
-    size_t dash1 = dateStr.find('-');
-    if (dash1 != std::string::npos) {
-        size_t dash2 = dateStr.find('-', dash1 + 1);
-        if (dash2 != std::string::npos) {
-            try {
-                m_year = std::stoi(dateStr.substr(0, dash1));
-                m_month = std::stoi(dateStr.substr(dash1 + 1, dash2 - dash1 - 1));
-                m_day = std::stoi(dateStr.substr(dash2 + 1));
-            }
-            catch (...) {
-                // Ignore conversion errors and leave elements 0 to trigger validation errors later
-            }
+    if (is >> y >> dash1 >> m >> dash2 >> d) {
+        if (dash1 == '-' && dash2 == '-') {
+            m_year = y;
+            m_month = m;
+            m_day = d;
+        }
+        else {
+            is.setstate(std::ios::failbit);
         }
     }
     return is;
