@@ -15,5 +15,5 @@ bool IdValidator::isValid(const uint32_t& value) const {
 }
 
 std::string IdValidator::getErrorMessage() const {
-    return "Invalid ID number (control digit failed).";
+    return "Wrong control digit.";
 }

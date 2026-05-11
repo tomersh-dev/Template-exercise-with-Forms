@@ -1,6 +1,8 @@
 #pragma once
 #include "FormValidator.h"
 #include "Field.h"
+#include <vector>
+#include <string>
 
 class CapacityValidator : public FormValidator {
 public:
@@ -10,10 +12,10 @@ public:
     std::string getErrorMessage() const override;
 
 private:
-    Field<int>* fTotalPeople;
-    Field<int>* fAdults;
-    Field<int>* fKids;
-    Field<int>* fPairRooms;
-    Field<int>* fFamilyRooms;
-    std::string errorMsg;
+    Field<int>* m_fTotalPeople;
+    Field<int>* m_fAdults;
+    Field<int>* m_fKids;
+    Field<int>* m_fPairRooms;
+    Field<int>* m_fFamilyRooms;
+    std::vector<std::string> m_errorMsgs;
 };

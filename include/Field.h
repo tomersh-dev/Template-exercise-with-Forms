@@ -9,17 +9,17 @@
 template <typename T>
 class Field : public BaseField {
 public:
-    explicit Field(const std::string& q) : question(q), valid(false) {}//!!!!!!!!!!!!!!!!
+    explicit Field(const std::string& q) : m_question(q), m_valid(false) {}
 
     void addValidator(Validator<T>* validator) {
-        validators.push_back(validator);
+        m_validators.push_back(validator);
     }
 
     void fillField() override {
-        if (valid) return;
+        if (m_valid) return;
 
-        std::cout << question << '\n';
-        while (!(std::cin >> value)) {
+        std::cout << m_question << '\n';
+        while (!(std::cin >> m_value)) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Invalid input format. Please try again:\n";
@@ -28,43 +28,42 @@ public:
     }
 
     bool validate() override {
-        for (auto* validator : validators) {
-            if (!validator->isValid(value)) {
-                currentError = validator->getErrorMessage();
-                valid = false;
+        for (auto* validator : m_validators) {
+            if (!validator->isValid(m_value)) {
+                m_currentError = validator->getErrorMessage();
+                m_valid = false;
                 return false;
             }
         }
-        currentError = "";
-        valid = true;
+        m_currentError = "";
+        m_valid = true;
         return true;
     }
 
     bool isValid() const override {
-        return valid;
+        return m_valid;
     }
 
     void print(std::ostream& os) const override {
-        os << question << " = " << value;
-        if (!valid && !currentError.empty()) {
-            os << "  ---> Error: " << currentError;
+        os << m_question << " = " << m_value;
+        if (!m_valid && !m_currentError.empty()) {
+            os << "\nError: " << m_currentError;
         }
     }
 
     T getValue() const {
-        return value;
+        return m_value;
     }
 
     void invalidate(const std::string& errorMsg) {
-        valid = false;
-        currentError = errorMsg;
+        m_valid = false;
+        m_currentError = errorMsg;
     }
 
 private:
-    std::string question;
-    T value;
-    bool valid;
-    std::string currentError;
-    std::vector<Validator<T>*> validators;
-
+    std::string m_question;
+    T m_value;
+    bool m_valid;
+    std::string m_currentError;
+    std::vector<Validator<T>*> m_validators;
 };

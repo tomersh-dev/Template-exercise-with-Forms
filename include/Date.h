@@ -1,14 +1,15 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 class Date {
 public:
-    Date() : year(1970), month(1), day(1) {}
-    Date(int y, int m, int d) : year(y), month(m), day(d) {}
+    Date() : m_year(0), m_month(0), m_day(0) {}
+    Date(int y, int m, int d) : m_year(y), m_month(m), m_day(d) {}
 
-    int getYear() const { return year; }
-    int getMonth() const { return month; }
-    int getDay() const { return day; }
+    int getYear() const { return m_year; }
+    int getMonth() const { return m_month; }
+    int getDay() const { return m_day; }
 
     Date operator-(int years) const;
 
@@ -18,13 +19,15 @@ public:
     bool operator<(const Date& other) const;
     bool operator==(const Date& other) const;
 
+    std::string getValidationError() const;
+
     std::istream& read(std::istream& is);
     std::ostream& print(std::ostream& os) const;
 
 private:
-    int year;
-    int month;
-    int day;
+    int m_year;
+    int m_month;
+    int m_day;
 };
 
 std::istream& operator>>(std::istream& is, Date& date);

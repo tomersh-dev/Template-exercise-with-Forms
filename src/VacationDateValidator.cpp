@@ -1,11 +1,22 @@
 #include "VacationDateValidator.h"
 
-VacationDateValidator::VacationDateValidator(const Date& current) : currentDate(current) {}
+VacationDateValidator::VacationDateValidator(const Date& current) : m_currentDate(current) {}
 
 bool VacationDateValidator::isValid(const Date& value) const {
-    return (value > currentDate) && (value.getYear() == currentDate.getYear());
+    std::string dateErr = value.getValidationError();
+    if (!dateErr.empty()) {
+        m_errorMessage = dateErr;
+        return false;
+    }
+
+    if (value > m_currentDate && value.getYear() == m_currentDate.getYear()) {
+        return true;
+    }
+
+    m_errorMessage = "Date must be in the future and within the current year.";
+    return false;
 }
 
 std::string VacationDateValidator::getErrorMessage() const {
-    return "Vacation date must be strictly in the future and within the current calendar year.";
+    return m_errorMessage;
 }

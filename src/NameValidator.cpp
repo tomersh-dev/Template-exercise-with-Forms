@@ -2,7 +2,7 @@
 #include <cctype>
 
 bool NameValidator::isValid(const std::string& value) const {
-    if (value.empty()) return false;
+    if (value.length() < 3) return false;
     for (char c : value) {
         if (std::isdigit(static_cast<unsigned char>(c))) return false;
     }
@@ -10,5 +10,5 @@ bool NameValidator::isValid(const std::string& value) const {
 }
 
 std::string NameValidator::getErrorMessage() const {
-    return "Name cannot contain digits or be empty.";
+    return "Name cannot contain digits and must be at least 3 characters long.";
 }

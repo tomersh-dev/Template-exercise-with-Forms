@@ -9,5 +9,6 @@ public:
     std::string getErrorMessage() const override;
 
 private:
-    Date currentDate;
+    Date m_currentDate;
+    mutable std::string m_errorMessage;
 };

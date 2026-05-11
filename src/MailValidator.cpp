@@ -7,5 +7,5 @@ bool MailValidator::isValid(const std::string& value) const {
 }
 
 std::string MailValidator::getErrorMessage() const {
-    return "Invalid email address format.";
+    return "Invalid email format.";
 }
