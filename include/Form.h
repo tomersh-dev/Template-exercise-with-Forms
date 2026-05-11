@@ -16,11 +16,12 @@ public:
     void fillForm();
     bool validateForm();
 
-    friend std::ostream& operator<<(std::ostream& os, const Form& form);//!!!!!!!!!!!
+    void print(std::ostream& os) const;
 
 private:
     std::vector<BaseField*> fields;
     std::vector<FormValidator*> formValidators;
     std::vector<std::string> formErrors;
-
 };
+
+std::ostream& operator<<(std::ostream& os, const Form& form);

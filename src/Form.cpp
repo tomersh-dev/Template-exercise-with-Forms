@@ -40,17 +40,21 @@ bool Form::validateForm() {
     return allValid;
 }
 
-std::ostream& operator<<(std::ostream& os, const Form& form) {
-    for (const auto* field : form.fields) {
+void Form::print(std::ostream& os) const {
+    for (const auto* field : fields) {
         field->print(os);
         os << '\n';
     }
 
-    if (!form.formErrors.empty()) {
+    if (!formErrors.empty()) {
         os << "\n--- Form Validation Errors ---\n";
-        for (const auto& err : form.formErrors) {
+        for (const auto& err : formErrors) {
             os << "! " << err << '\n';
         }
     }
+}
+
+std::ostream& operator<<(std::ostream& os, const Form& form) {
+    form.print(os);
     return os;
 }
