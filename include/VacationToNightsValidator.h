@@ -10,6 +10,10 @@ public:
     }
 
     bool validate() override {
+        if (!m_vacationField->isValid() || !m_numNightsField->isValid()) {
+            return true;
+        }
+
         int vacType = m_vacationField->getValue().getValue();
         int nights = m_numNightsField->getValue();
 

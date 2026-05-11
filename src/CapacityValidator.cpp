@@ -7,6 +7,11 @@ CapacityValidator::CapacityValidator(Field<int>* totalPeople, Field<int>* adults
 bool CapacityValidator::validate() {
     m_errorMsgs.clear();
 
+    if (!m_fTotalPeople->isValid() || !m_fAdults->isValid() || !m_fKids->isValid() ||
+        !m_fPairRooms->isValid() || !m_fFamilyRooms->isValid()) {
+        return true;
+    }
+
     int total = m_fTotalPeople->getValue();
     int adults = m_fAdults->getValue();
     int kids = m_fKids->getValue();

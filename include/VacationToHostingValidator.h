@@ -10,6 +10,10 @@ public:
     }
 
     bool validate() override {
+        if (!m_vacationField->isValid() || !m_hostingField->isValid()) {
+            return true;
+        }
+
         if (m_vacationField->getValue().getValue() == 1 && m_hostingField->getValue().getValue() == 1) {
             m_vacationField->invalidate("");
             m_hostingField->invalidate("");
