@@ -15,11 +15,15 @@ public:
 
         if (vacType == 1 && nights < 3) {
             m_errorMessage = "A Weekend vacation requires a minimum of 3 nights.";
+            m_vacationField->invalidate("");
+            m_numNightsField->invalidate("");
             return false;
         }
 
         if (vacType == 2 && nights > 5) {
             m_errorMessage = "A Mid-week vacation can be up to 5 nights. For more, please select Weekend.";
+            m_vacationField->invalidate("");
+            m_numNightsField->invalidate("");
             return false;
         }
 

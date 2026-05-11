@@ -36,6 +36,14 @@ bool CapacityValidator::validate() {
         valid = false;
     }
 
+    if (!valid) {
+        m_fTotalPeople->invalidate("");
+        m_fAdults->invalidate("");
+        m_fKids->invalidate("");
+        m_fPairRooms->invalidate("");
+        m_fFamilyRooms->invalidate("");
+    }
+
     return valid;
 }
 

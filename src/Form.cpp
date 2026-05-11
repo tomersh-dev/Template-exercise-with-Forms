@@ -41,17 +41,17 @@ bool Form::validateForm() {
 }
 
 void Form::print(std::ostream& os) const {
-    if (!m_formErrors.empty()) {
-        for (const auto& err : m_formErrors) {
-            os << err << '\n';
-        }
-    }
-
     os << "--------------------------------------------------------------------------------\n";
     for (const auto* field : m_fields) {
         field->print(os);
         os << '\n';
         os << "--------------------------------------------------------------------------------\n";
+    }
+
+    if (!m_formErrors.empty()) {
+        for (const auto& err : m_formErrors) {
+            os << err << '\n';
+        }
     }
 }
 
