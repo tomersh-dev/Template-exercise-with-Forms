@@ -26,10 +26,6 @@ bool Form::validateForm() {
         }
     }
 
-    if (!allValid) {
-        return false;
-    }
-
     for (auto* formValidator : m_formValidators) {
         if (!formValidator->validate()) {
             m_formErrors.push_back(formValidator->getErrorMessage());
